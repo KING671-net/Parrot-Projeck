@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PARROT AIL - Leading Cryptocurrency on Solana</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Cormorant+Garamond:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #2d1b69 0%, #4a148c 100%);
+            color: white;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Background Animation with Parrot Images */
+        .parrot-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .parrot {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y="50%" x="50%" dominant-baseline="middle" text-anchor="middle" font-size="60">🦜</text></svg>');
+            background-size: contain;
+            background-repeat: no-repeat;
+            animation: flyParrot 30s infinite linear;
+            opacity: 0.7;
+        }
+
+        .parrot:nth-child(1) { top: 10%; left: -10%; animation-delay: 0s; }
+        .parrot:nth-child(2) { top: 20%; right: -10%; animation-delay: -5s; }
+        .parrot:nth-child(3) { top: 40%; left: -10%; animation-delay: -10s; }
+        .parrot:nth-child(4) { top: 60%; right: -10%; animation-delay: -15s; }
+        .parrot:nth-child(5) { top: 70%; left: -10%; animation-delay: -2s; }
+        .parrot:nth-child(6) { top: 30%; right: -10%; animation-delay: -8s; }
+        .parrot:nth-child(7) { top: 80%; left: -10%; animation-delay: -12s; }
+        .parrot:nth-child(8) { top: 15%; right: -10%; animation-delay: -18s; }
+        .parrot:nth-child(9) { top: 50%; left: -10%; animation-delay: -3s; }
+        .parrot:nth-child(10) { top: 25%; right: -10%; animation-delay: -14s; }
+
+        @keyframes flyParrot {
+            0% {
+                transform: translateX(0) rotate(0deg) scale(1);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateX(calc(100vw + 100px)) rotate(360deg) scale(0.8);
+                opacity: 0;
+            }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 0;
+        }
+
+        .logo {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 20px;
+            border: 3px solid rgba(255, 215, 0, 0.3);
+            border-radius: 50%;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.7);
+        }
+
+        h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3.5rem;
+            margin-bottom: 10px;
+            letter-spacing: 3px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            background: linear-gradient(45deg, #ffd700, #ffb347);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 30px;
+            color: #e0e7ff;
+        }
+
+        .crypto-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 50px;
+        }
+
+        .info-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .info-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .info-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: #ffd700;
+        }
+
+        .solana-icon {
+            width: 40px;
+            height: 40px;
+            margin: 0 auto 15px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300"><path fill="%23ffd700" d="M166.3 69.8h39.3v39.4h-39.3V69.8zm-48.1 0h39.3v39.4h-39.3V69.8zm48.2 48.2h39.3v39.4h-39.3V118zm-48.2 0h39.3v39.4h-39.3V118zm48.2 48.2h39.3v39.4h-39.3v-39.4zm-48.2 0h39.3v39.4h-39.3v-39.4zm48.2 48.2h39.3V262h-39.3v-39.4zm-48.2 0h39.3V262h-39.3v-39.4z"/></svg>');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        .info-title {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .info-value {
+            font-size: 1.8rem;
+            color: #ffffff;
+            font-weight: 500;
+        }
+
+        .status-badge {
+            display: inline-block;
+            background: #ff6b6b;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-top: 10px;
+        }
+
+        .address-section {
+            position: relative;
+        }
+
+        .copy-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(255, 215, 0, 0.2);
+            border: none;
+            border-radius: 50%;
+            width: 36px;
+            height: 36px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .copy-btn:hover {
+            background: rgba(255, 215, 0, 0.4);
+        }
+
+        .address-display {
+            font-family: monospace;
+            word-break: break-all;
+            background: rgba(255,255,255,0.1);
+            padding: 10px;
+            border-radius: 8px;
+            margin-top: 10px;
+            font-size: 0.9rem;
+            color: #e0e7ff;
+        }
+
+        .copied {
+            background: rgba(255, 215, 0, 0.4) !important;
+        }
+
+        .description {
+            text-align: center;
+            max-width: 800px;
+            margin: 50px auto;
+            line-height: 1.6;
+            font-size: 1.1rem;
+            opacity: 0.9;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 25px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        .social-links {
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 215, 0, 0.2);
+            border-radius: 50%;
+            margin: 0 10px;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 1.5rem;
+        }
+
+        .social-links a.twitter {
+            background: rgba(29, 161, 242, 0.2);
+        }
+
+        .social-links a.telegram {
+            background: rgba(26, 115, 232, 0.2);
+        }
+
+        .social-links a:hover {
+            transform: scale(1.1);
+        }
+
+        .social-links a.twitter:hover {
+            background: rgba(29, 161, 242, 0.4);
+        }
+
+        .social-links a.telegram:hover {
+            background: rgba(26, 115, 232, 0.4);
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 40px;
+            opacity: 0.7;
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* New roadmap section */
+        .roadmap {
+            margin: 60px 0;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        .roadmap h2 {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 2.5rem;
+            background: linear-gradient(45deg, #ffd700, #ffb347);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .roadmap-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            position: relative;
+            margin-left: 20px;
+        }
+
+        .roadmap-steps::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 20px;
+            width: 4px;
+            background: linear-gradient(to bottom, #ffd700, #4a148c);
+            border-radius: 2px;
+        }
+
+        .roadmap-step {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            position: relative;
+        }
+
+        .step-marker {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ffd700, #ff8c00);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            z-index: 2;
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+
+        .step-content {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 12px;
+            flex: 1;
+        }
+
+        .step-content h3 {
+            margin-bottom: 10px;
+            color: #ffd700;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .crypto-info {
+                grid-template-columns: 1fr;
+            }
+            
+            .info-card {
+                width: 100%;
+            }
+            
+            .roadmap-steps {
+                margin-left: 10px;
+            }
+            
+            .roadmap-steps::before {
+                left: 17px;
+            }
+            
+            .step-marker {
+                width: 34px;
+                height: 34px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Parrots -->
+    <div class="parrot-bg">
+        <div class="parrot"></div>
+        <div class="parrot"></div>
+        <div class="parrot"></div>
+        <div class="parrot"></div>
+        <div class="parrot"></div>
+        <div class="parrot"></div>
+        <div class="parrot"></div>
+        <div class="parrot"></div>
+        <div class="parrot"></div>
+        <div class="parrot"></div>
+    </div>
+
+    <div class="container">
+        <header>
+            <div class="logo">
+                <img src="https://tinypic.host/images/2025/09/10/1001401392.jpg" alt="PARROT AIL Logo">
+            </div>
+            <h1>PARROT AIL</h1>
+            <p class="subtitle">Leading Cryptocurrency Project in Solana Ecosystem</p>
+        </header>
+
+        <section class="crypto-info">
+            <div class="info-card">
+                <div class="info-icon">
+                    <i class="fas fa-coins"></i>
+                </div>
+                <div class="info-title">Total Supply</div>
+                <div class="info-value">1B</div>
+            </div>
+
+            <div class="info-card">
+                <div class="solana-icon"></div>
+                <div class="info-title">Blockchain Network</div>
+                <div class="info-value">Solana</div>
+            </div>
+
+            <div class="info-card">
+                <div class="info-icon">
+                    <i class="fas fa-clock"></i>
+                </div>
+                <div class="info-title">Token Status</div>
+                <div class="info-value">In Progress</div>
+                <span class="status-badge">Coming Soon</span>
+            </div>
+
+            <div class="info-card address-section">
+                <button class="copy-btn" onclick="copyAddress()">
+                    <i class="fas fa-copy"></i>
+                </button>
+                <div class="info-icon">
+                    <i class="fas fa-address-book"></i>
+                </div>
+                <div class="info-title">Contract Address</div>
+                <div class="info-value">Not Available Yet</div>
+                <div class="address-display">Contract will be published upon launch</div>
+            </div>
+        </section>
+
+        <section class="description">
+            <p>
+                PARROT AIL is an innovative cryptocurrency initiative focused on developing the Solana ecosystem. 
+                With a total supply of 1 billion tokens, we are committed to providing leading financial solutions 
+                for the global community. Our project is currently in development phase and will be launched soon.
+            </p>
+            <p style="margin-top: 15px;">
+                Join our community to stay updated with the latest developments and be part of the future of 
+                decentralized finance on Solana.
+            </p>
+        </section>
+
+        <section class="roadmap">
+            <h2>Project Roadmap</h2>
+            <div class="roadmap-steps">
+                <div class="roadmap-step">
+                    <div class="step-marker">
+                        <i class="fas fa-seedling"></i>
+                    </div>
+                    <div class="step-content">
+                        <h3>Q4 2023 - Foundation</h3>
+                        <p>Project conceptualization, team formation, and initial development. Community building on Twitter and Telegram.</p>
+                    </div>
+                </div>
+                <div class="roadmap-step">
+                    <div class="step-marker">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <div class="step-content">
+                        <h3>Q1 2024 - Token Launch</h3>
+                        <p>Token generation, smart contract deployment, and initial liquidity provision. First community airdrops.</p>
+                    </div>
+                </div>
+                <div class="roadmap-step">
+                    <div class="step-marker">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="step-content">
+                        <h3>Q2 2024 - Ecosystem Growth</h3>
+                        <p>CEX listings, partnerships with other Solana projects, and expansion of the PARROT AIL ecosystem.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="social-links">
+            <a href="https://x.com/parrot_token_ai?t=-YGfNZFYGqXLuhLuxW0cLQ&s=09" class="twitter" target="_blank" title="Twitter/X">
+                <i class="fab fa-twitter"></i>
+            </a>
+            <a href="https://t.me/parrot_comunity" class="telegram" target="_blank" title="Telegram">
+                <i class="fab fa-telegram-plane"></i>
+            </a>
+        </section>
+
+        <footer>
+            <p>&copy; 2023 PARROT AIL. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Copy address function
+        function copyAddress() {
+            // In a real implementation, you would get the actual address here
+            const tempInput = document.createElement('input');
+            document.body.appendChild(tempInput);
+            tempInput.value = "Your_contract_address_here";
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+            
+            // Visual feedback
+            const btn = event.target.closest('.copy-btn');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-check"></i>';
+            btn.classList.add('copied');
+            
+            setTimeout(() => {
+                btn.innerHTML = originalText;
+                btn.classList.remove('copied');
+            }, 2000);
+        }
+
+        // Simple animation for cards on scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = 1;
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        });
+
+        document.querySelectorAll('.info-card, .roadmap-step').forEach(card => {
+            card.style.opacity = 0;
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>
